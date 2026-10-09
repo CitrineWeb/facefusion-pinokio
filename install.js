@@ -25,102 +25,88 @@ function install(kernel)
 
 module.exports = async kernel =>
 {
-	const config =
-	{
-		run:
-		[
+	const config = {
+		run: [
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'git clone https://github.com/facefusion/facefusion --branch 3.9.1 --single-branch'
-				}
+				method: "shell.run",
+				params: {
+					message:
+						"git clone https://github.com/CitrineWeb/facefusion --branch uncensored_latest --single-branch",
+				},
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'conda install conda=25.5.1 --yes'
-				}
+				method: "shell.run",
+				params: {
+					message: "conda install conda=25.5.1 --yes",
+				},
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'conda install python=3.12 --yes',
-					conda:
-					{
-						path: path.resolve(__dirname, '.env')
-					}
-				}
+				method: "shell.run",
+				params: {
+					message: "conda install python=3.12 --yes",
+					conda: {
+						path: path.resolve(__dirname, ".env"),
+					},
+				},
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'conda install conda-forge::ffmpeg=7.0.2 conda-forge::libvorbis=1.3.7 --yes',
-					conda:
-					{
-						path: path.resolve(__dirname, '.env')
-					}
-				}
+				method: "shell.run",
+				params: {
+					message:
+						"conda install conda-forge::ffmpeg=7.0.2 conda-forge::libvorbis=1.3.7 --yes",
+					conda: {
+						path: path.resolve(__dirname, ".env"),
+					},
+				},
 			},
 			{
 				when: '{{ (platform === "linux" || platform === "win32") && gpu === "intel" }}',
-				method: 'shell.run',
-				params:
-				{
-					message: 'conda install conda-forge::openvino=2025.1.0 --yes',
-					conda:
-					{
-						path: path.resolve(__dirname, '.env')
-					}
-				}
+				method: "shell.run",
+				params: {
+					message:
+						"conda install conda-forge::openvino=2025.1.0 --yes",
+					conda: {
+						path: path.resolve(__dirname, ".env"),
+					},
+				},
 			},
 			{
 				when: '{{ (platform === "linux" || platform === "win32") && gpu === "nvidia" }}',
-				method: 'shell.run',
-				params:
-				{
-					message:
-					[
-						'conda install nvidia/label/cuda-12.9.1::cuda-runtime nvidia/label/cudnn-9.10.2::cudnn --yes',
-						'pip install tensorrt==10.12.0.36 --extra-index-url https://pypi.nvidia.com'
+				method: "shell.run",
+				params: {
+					message: [
+						"conda install nvidia/label/cuda-12.9.1::cuda-runtime nvidia/label/cudnn-9.10.2::cudnn --yes",
+						"pip install tensorrt==10.12.0.36 --extra-index-url https://pypi.nvidia.com",
 					],
-					conda:
-					{
-						path: path.resolve(__dirname, '.env')
-					}
-				}
-			},
-			{
-				method: 'shell.run',
-				params:
-				{
-					message: install(kernel),
-					path: 'facefusion',
-					conda:
-					{
-						path: path.resolve(__dirname, '.env')
+					conda: {
+						path: path.resolve(__dirname, ".env"),
 					},
-					on:
-					[
-						{
-							event: '/error:/i',
-							break: false
-						}
-					]
-				}
+				},
 			},
 			{
-				method: 'input',
-				params:
-				{
-					title: 'Installation completed',
-					description: 'Return to the dashboard to start FaceFusion.'
-				}
-			}
-		]
+				method: "shell.run",
+				params: {
+					message: install(kernel),
+					path: "facefusion",
+					conda: {
+						path: path.resolve(__dirname, ".env"),
+					},
+					on: [
+						{
+							event: "/error:/i",
+							break: false,
+						},
+					],
+				},
+			},
+			{
+				method: "input",
+				params: {
+					title: "Installation completed",
+					description: "Return to the dashboard to start FaceFusion.",
+				},
+			},
+		],
 	};
 
 	return config;

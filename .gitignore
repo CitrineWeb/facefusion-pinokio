@@ -1,4 +1,6 @@
 .claude
 .idea
 .vscode
+facefusion
 node_modules
+.env
