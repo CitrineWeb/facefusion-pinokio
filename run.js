@@ -15,22 +15,14 @@ module.exports = () =>
 		run:
 		[
 			{
-				method: 'local.set',
+				method: "local.set",
 				params:
 				{
 					mode: '{{ input.mode }}'
 				}
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'git checkout --quiet -- facefusion',
-					path: 'facefusion'
-				}
-			},
-			{
-				method: 'shell.run',
+				method: "shell.run",
 				params:
 				{
 					message: '{{ self.cmd[local.mode] }}',
