@@ -1,33 +1,28 @@
 module.exports = () =>
 {
-	const config =
-	{
-		run:
-		[
+	const config = {
+		run: [
 			{
-				method: 'shell.run',
-				params:
-				{
-					'message': 'git pull'
-				}
+				method: "shell.run",
+				params: {
+					message: "git pull",
+				},
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'git pull --tags',
-					path: 'facefusion'
-				}
+				method: "shell.run",
+				params: {
+					message: "git pull --tags",
+					path: "facefusion",
+				},
 			},
 			{
-				method: 'shell.run',
-				params:
-				{
-					message: 'git checkout 3.9.1',
-					path: 'facefusion'
-				}
-			}
-		]
+				method: "shell.run",
+				params: {
+					message: "git checkout uncensored_latest",
+					path: "facefusion",
+				},
+			},
+		],
 	};
 
 	return config;
